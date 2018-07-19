@@ -1,0 +1,61 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<h1>Rate my Cakes</h1>
+
+<h3>Create a new cake</h3>
+
+<!-- create a new cake -->
+<div>
+  <form (submit)="addCake()" class="createNewCake">
+    <p>Baker Name:</p>
+    <input type="text" name="baker" [(ngModel)]="newCake.bakerName">
+    <br>
+    <p>Cake Url:</p>
+    <input type="text" name="imageUrl" [(ngModel)]="newCake.imageUrl">
+    <p>Description:</p>
+    <input type="text" name="description" [(ngModel)]="newCake.description">
+
+    <input type="submit" value="Submit">
+    <br>
+  </form>
+</div>
+
+<hr>
+
+<!-- show the cake and then rate it -->
+<div *ngFor="let cake of cakes">
+  <h4> Baker: {{ cake.bakerName }}</h4>
+
+  <img (click)="displayInfo(cake._id)" src="{{cake.imageUrl}}" alt="cake" height="150" width="150">
+
+  <!-- add a rating!! -->
+  <form (submit)="addRating(ratingFormObject.value, cake._id)" #ratingFormObject="ngForm">
+
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+      <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">Rate</button>
+
+      <select class="btn-group" role="group" ngModel name="rating">
+        <option class="dropdown-item" type="number" value="1">1</option>
+        <option class="dropdown-item" type="number" value="2">2</option>
+        <option class="dropdown-item" type="number" value="3">3</option>
+        <option class="dropdown-item" type="number" value="4">4</option>
+        <option class="dropdown-item" type="number" value="5">5</option>
+      </select>
+
+      <div class="form-group">
+        <label for="comment">Leave a comment for the cake here:</label>
+        <textarea class="form-control" rows="5" ngModel name='comment'></textarea>
+        <input type="submit" value="Rate">
+      </div>
+    </div>
+  </form>
+</div>
+
+<hr>
+
+<!-- Nested Component -->
+<app-show-details *ngIf="showDetails" [showDetails]="showDetails"></app-show-details>

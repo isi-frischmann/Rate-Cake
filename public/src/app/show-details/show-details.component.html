@@ -1,0 +1,21 @@
+<p>
+  show-details works!
+</p>
+
+<!-- show the details for a specific cake -->
+<div *ngIf="showDetails">
+    <h3>These is the specific Cake with the informations:</h3>
+    <p>Name: {{showDetails.bakerName}}</p>
+    <p>Description: {{showDetails.description}}</p>
+    <img src={{showDetails.imageUrl}} height="150" width="150">
+  
+    <div *ngFor="let rate of showDetails.ratings">
+      <p>{{showDetails.comment}}</p>
+  
+      <p>Rate Comment: {{rate.comment}}</p>
+      <p>Rate Amount: {{rate.rate}}</p>
+  
+      <!-- if you want to loop through an array -->
+      <!-- <p>Rate Amount: {{showDetails.ratings[0].rate}}</p> -->
+    </div>
+  </div>
